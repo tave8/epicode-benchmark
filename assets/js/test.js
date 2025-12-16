@@ -62,7 +62,10 @@ const passaAProssimaDomanda = function () {
 
   aggiornaDomandaUI(prossimaDomanda);
 
-  //    attivaCountdownUIIn();
+  //   TODO: fare meccanismo timer
+  // aggiornare l'elemento html interessato ad ogni
+
+  //  attivaCountdownUI();
 
   // verifica che le domande non siano già arrivate alla fine
   // if () {
@@ -70,10 +73,15 @@ const passaAProssimaDomanda = function () {
   // }
 
   //   aggiorna anche il numero di domande nel footer
-  const testoConNumDomanda = `QUESTION ${indiceDomandaAttuale} / ${questions.length}`
-  document.querySelector("footer .questionNumber").textContent = testoConNumDomanda
-
+  aggiornaNumeroDomandeUI(indiceDomandaAttuale);
 };
+
+
+
+function aggiornaNumeroDomandeUI(indiceDomandaAttuale) {
+  const testoConNumDomanda = `QUESTION ${indiceDomandaAttuale} / ${questions.length}`;
+  document.querySelector("footer .questionNumber").textContent = testoConNumDomanda;
+}
 
 // SCHEMA DOMANDA
 //   {
