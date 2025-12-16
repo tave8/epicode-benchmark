@@ -47,13 +47,17 @@ function addEventListeners() {
 }
 
 function handleClickBottoneRisposta(ev) {
+  // TODO: quando utente clicca risposta, aggiungere classe per evidenziare
+  //
+  //   ev.target.classList.add("");
+
   passaAProssimaDomanda();
 }
 
 const passaAProssimaDomanda = function () {
   if (haiTerminatoDomande()) {
+    caricaPaginaRisultati();
     // passa alla prossima pagina
-    window.location.href = "./results.html";
     return;
   }
 
@@ -123,6 +127,11 @@ function aggiornaNumeroDomandeUI(indiceDomandaAttuale) {
   document.querySelector("footer .questionNumber").textContent = testoConNumDomanda;
 }
 
+function caricaPaginaRisultati() {
+  // TODO
+  window.location.href = "./results.html";
+}
+
 // SCHEMA DOMANDA
 //   {
 //     category: "Science: Computers",
@@ -176,32 +185,3 @@ function ottieniTutteRisposte(domandaObj) {
 function haiTerminatoDomande() {
   return indiceDomandaAttuale === questions.length;
 }
-
-// FUNZIONALITà DI TIMER
-
-// var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-// var yValues = [55, 49, 44, 24, 15];
-// var barColors = [
-//   "#b91d47",
-//   "#00aba9",
-//   "#2b5797",
-//   "#e8c3b9",
-//   "#1e7145"
-// ];
-
-// const chart = new Chart("myChart", {
-//   type: "doughnut",
-//   data: {
-//     labels: xValues,
-//     datasets: [{
-//       backgroundColor: barColors,
-//       data: yValues
-//     }]
-//   },
-//   options: {
-//     title: {
-//       display: true,
-//       text: "World Wide Wine Production 2018"
-//     }
-//   }
-// });
