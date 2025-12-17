@@ -46,6 +46,9 @@ footer {
   justify-content: center;
 }
 span {
+  color: white;
+}
+#fine {
   color: #d20094;
   letter-spacing: 2px;
   font-weight: 500;
@@ -56,7 +59,6 @@ span {
 }
 /* TODO: creare classe "risposta-selected" quando il bottone che contiene
 la risposta viene cliccata */
-
 .risposta-selected {
   background-color: #d20094;
 }
@@ -88,7 +90,6 @@ header > .right > .timer {
   justify-content: center;
   align-items: center;
 }
-
 
 /* ELEMENTI INTERNI AL TIMER (CIAMBELLA che diventa sempre più piccola) */
 

@@ -49,18 +49,15 @@ textarea {
   box-shadow: #c42177 0px 2px 0px 0px;
   resize: none;
 }
-/* .stella {
+.stella {
   margin: 5px;
-  width: 6%;
-  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 .valutazione {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  font-size: 40px;
   cursor: pointer;
-} */
+}
 /* .stella {
   color: #0c1b3a;
   transition: color 0.2s ease, transform 0.2s ease;
