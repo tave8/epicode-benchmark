@@ -6,7 +6,7 @@ const questions = [
     question: "What does CPU stand for?",
     correct_answer: "Central Processing Unit",
     incorrect_answers: ["Central Process Unit", "Computer Personal Unit", "Central Processor Unit"],
-    countdownSecondi: 5,
+    countdownSecondi: 80,
   },
   {
     category: "Science: Computers",
@@ -15,7 +15,7 @@ const questions = [
     question: "In the programming language Java, which of these keywords would you put on a variable to make sure it doesn&#039;t get modified?",
     correct_answer: "Final",
     incorrect_answers: ["Static", "Private", "Public"],
-    countdownSecondi: 10,
+    countdownSecondi: 80,
   },
   {
     category: "Science: Computers",
@@ -24,7 +24,7 @@ const questions = [
     question: "The logo for Snapchat is a Bell.",
     correct_answer: "False",
     incorrect_answers: ["True"],
-    countdownSecondi: 5,
+    countdownSecondi: 80,
   },
 ];
 
@@ -52,15 +52,15 @@ function handleClickBottoneRisposta(ev) {
   });
 }
 
-const passaAProssimaDomanda = function (config={}) {
+const passaAProssimaDomanda = function (config = {}) {
   // const { bottonCliccatoEl } = config;
 
   // togli, da tutti gli elementi html che hanno la classa risposta-selected, la classa risposta-selected
   // document.querySelectorAll(".risposta-selected").forEach((el) => el.classList.remove("risposta-selected"));
 
   // if (bottonCliccatoEl) {
-    // quando utente clicca una risposta, marcare quella risposta come evidenziata
-    // bottonCliccatoEl.classList.add("risposta-selected");
+  // quando utente clicca una risposta, marcare quella risposta come evidenziata
+  // bottonCliccatoEl.classList.add("risposta-selected");
   // }
 
   if (haiTerminatoDomande()) {
@@ -93,7 +93,7 @@ const passaAProssimaDomanda = function (config={}) {
 };
 
 function attivaTimerUI({ countdownSecondi }) {
-  const timerEl = document.querySelector("header > .right > .timer");
+  const timerEl = document.querySelector("header > .right > .timer > span");
   let nuovoTempo = countdownSecondi;
 
   // questa funzionalità permette di pulire il setInterval precedente,
@@ -129,6 +129,28 @@ function attivaTimerUI({ countdownSecondi }) {
 
   intervalloTempo();
 }
+
+//ciambella timber
+
+function attivaCiambellaTimer() {
+  const ring = document.querySelector(".timer > .ringsvg > .ringprogress");
+  const CIRC = 283;
+
+  function setRingProgress(progress) {
+    ring.style.strokeDashoffset = CIRC * (1 - progress);
+  }
+  let p = 1;
+  setRingProgress(p);
+  const id = setInterval(() => {
+    p += 0.02;
+    if (p <= 0) {
+      p = 0;
+      clearInterval(id);
+    }
+    setRingProgress(p);
+  }, 1000);
+}
+// attivaCiambellaTimer();
 
 function aggiornaNumeroDomandeUI(indiceDomandaAttuale) {
   const testoConNumDomanda = `QUESTION ${indiceDomandaAttuale} / ${questions.length}`;
