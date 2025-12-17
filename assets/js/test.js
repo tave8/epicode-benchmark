@@ -52,15 +52,15 @@ function handleClickBottoneRisposta(ev) {
   });
 }
 
-const passaAProssimaDomanda = function (config={}) {
+const passaAProssimaDomanda = function (config = {}) {
   // const { bottonCliccatoEl } = config;
 
   // togli, da tutti gli elementi html che hanno la classa risposta-selected, la classa risposta-selected
   // document.querySelectorAll(".risposta-selected").forEach((el) => el.classList.remove("risposta-selected"));
 
   // if (bottonCliccatoEl) {
-    // quando utente clicca una risposta, marcare quella risposta come evidenziata
-    // bottonCliccatoEl.classList.add("risposta-selected");
+  // quando utente clicca una risposta, marcare quella risposta come evidenziata
+  // bottonCliccatoEl.classList.add("risposta-selected");
   // }
 
   if (haiTerminatoDomande()) {
@@ -131,7 +131,7 @@ function attivaTimerUI({ countdownSecondi }) {
 }
 
 function aggiornaNumeroDomandeUI(indiceDomandaAttuale) {
-  const testoConNumDomanda = `QUESTION ${indiceDomandaAttuale} / ${questions.length}`;
+  const testoConNumDomanda = `QUESTION ${indiceDomandaAttuale}`;
   document.querySelector("footer .questionNumber").textContent = testoConNumDomanda;
 }
 

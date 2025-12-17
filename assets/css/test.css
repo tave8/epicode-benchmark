@@ -38,19 +38,43 @@ h1 {
   margin: 10px;
   cursor: pointer;
 }
+form {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+form input {
+  display: none;
+}
+#conferma {
+  cursor: pointer;
+  width: 230px;
+  height: 70px;
+  border: none;
+  background-color: #00ffff;
+  box-shadow: #00ffff 0px 0px 15px 5px;
+  font-weight: bold;
+  font-size: 25px;
+  color: #0c113b;
+  display: block;
+}
 footer {
   margin-top: 100px;
   color: white;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 span {
   color: #d20094;
+  letter-spacing: 2px;
+  font-weight: 500;
 }
 .questionNumber {
   letter-spacing: 2px;
   font-weight: 500;
 }
-
 /* TODO: creare classe "risposta-selected" quando il bottone che contiene
 la risposta viene cliccata */
 
