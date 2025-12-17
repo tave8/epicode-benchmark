@@ -129,7 +129,20 @@ function aggiornaNumeroDomandeUI(indiceDomandaAttuale) {
 
 function caricaPaginaRisultati() {
   // TODO
-  window.location.href = "./results.html";
+  const totDomande = questions.length
+  const totDomandeGiuste = 1
+  const totDomandeSbagliate = totDomande - totDomandeGiuste
+
+  const risultatiTest = {
+    totDomande,
+    totDomandeGiuste, 
+    totDomandeSbagliate 
+  }
+
+  const risultatiTestStr = JSON.stringify(risultatiTest)
+
+  const url = `/results.html?risultatiTest=${risultatiTestStr}`
+  window.location.href = url;
 }
 
 // SCHEMA DOMANDA

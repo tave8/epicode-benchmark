@@ -21,3 +21,9 @@ window.addEventListener("load", () => {
     },
   });
 });
+
+
+// LOGICA per mostrare il numero e percentuale di domande giuste e sbagliate
+// domande giuste = totale domande / numero domande giuste
+// domande sbagliate = totale domande / numero domande sbagliate
+
