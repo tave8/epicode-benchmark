@@ -118,5 +118,5 @@ header > .right > .timer {
   stroke-dasharray: 283;
   stroke-dashoffset: 0;
 
-  transition: stroke-dashoffset 0.3s linear;
+  transition: stroke-dashoffset 0.2s linear;
 }

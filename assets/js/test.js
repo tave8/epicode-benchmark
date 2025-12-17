@@ -6,7 +6,7 @@ const questions = [
     question: "What does CPU stand for?",
     correct_answer: "Central Processing Unit",
     incorrect_answers: ["Central Process Unit", "Computer Personal Unit", "Central Processor Unit"],
-    countdownSecondi: 20,
+    countdownSecondi: 17,
   },
   {
     category: "Science: Computers",
@@ -15,7 +15,7 @@ const questions = [
     question: "In the programming language Java, which of these keywords would you put on a variable to make sure it doesn&#039;t get modified?",
     correct_answer: "Final",
     incorrect_answers: ["Static", "Private", "Public"],
-    countdownSecondi: 10,
+    countdownSecondi: 15,
   },
   {
     category: "Science: Computers",
@@ -24,7 +24,7 @@ const questions = [
     question: "The logo for Snapchat is a Bell.",
     correct_answer: "False",
     incorrect_answers: ["True"],
-    countdownSecondi: 5,
+    countdownSecondi: 25,
   },
 ];
 
@@ -84,7 +84,7 @@ const passaAProssimaDomanda = function (config = {}) {
     countdownSecondi: prossimaDomanda.countdownSecondi,
   });
 
-  initCiambella();
+  // initCiambella();
 
   // verifica che le domande non siano già arrivate alla fine
   // if () {
@@ -107,9 +107,15 @@ function attivaTimerUI({ countdownSecondi }) {
     // verifica se il tempo arriva allo zero
     // se si, passa alla prossima domanda
     const eTempoAZero = secondiRimasti === 0;
+    const mancaUnSecondo = secondiRimasti === 1;
+
+    if (mancaUnSecondo) {
+      // svuotaCiambella();
+    }
 
     // se il tempo è a zero, passa alla prossima domanda
     if (eTempoAZero) {
+      // svuotaCiambella()
       passaAProssimaDomanda();
     }
     // altrimenti (se il timer è ancora attivo) aggiorna
@@ -117,17 +123,16 @@ function attivaTimerUI({ countdownSecondi }) {
     else {
       timerEl.textContent = secondiRimasti;
     }
-    // il nuovo tempo sarà il tempo attuale - 1 (secondo)
-    secondiRimasti = secondiRimasti - 1;
 
     aggiornaCiambella({
       secondiTotali: countdownSecondi,
       secondiRimasti: secondiRimasti,
     });
+
+    // il nuovo tempo sarà il tempo attuale - 1 (secondo)
+    secondiRimasti = secondiRimasti - 1;
   };
 
-  // problema: setInterval continua all'infinito, invece dovrebbe
-  // resettarsi ogni volta che si passa ad una nuova domanda
 
   // salva l'ultimo setInterval così potrai cancellare l'esecuzione
   // della funzione che c'era all'interno
@@ -138,19 +143,22 @@ function attivaTimerUI({ countdownSecondi }) {
   intervalloTempo();
 }
 
-function initCiambella() {
+function riempiCiambella() {
   // console.log("inizializzato ciambella");
   const ring = getCiambellaRingEl();
   const CIRC = calcolaCIRC(48);
 
-  ring.style.strokeDasharray = CIRC;
+  // ring.style.strokeDasharray = CIRC;
   ring.style.strokeDashoffset = 0;
+}
 
-  return {
-    ring,
-    CIRC,
-  };
-  
+function svuotaCiambella() {
+  // console.log("inizializzato ciambella");
+  const ring = getCiambellaRingEl();
+  const CIRC = calcolaCIRC(48);
+
+  // ring.style.strokeDasharray = 0;
+  ring.style.strokeDashoffset = 0;
 }
 
 // ciambella timber
@@ -158,9 +166,14 @@ function aggiornaCiambella({ secondiTotali, secondiRimasti }) {
   const ring = getCiambellaRingEl();
   const CIRC = calcolaCIRC(48);
   const progress = secondiRimasti / secondiTotali;
-  ring.style.strokeDashoffset = CIRC * (1 - progress);
+  let num = CIRC * (1 - progress);
+  // se il valore di strokeDashoffset sarà maggiore del massimo (283)
+  // allora azzera la strokeDashoffset, questo significa "la ciambella è di nuovo piena"
+  if (num >= 283) {
+    num = 0;
+  }
+  ring.style.strokeDashoffset = num;
 }
-
 
 function getCiambellaRingEl() {
   return document.querySelector(".timer > .ringsvg > .ringprogress");
