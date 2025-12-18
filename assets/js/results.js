@@ -9,6 +9,17 @@ function quandoPaginaCarica() {
   const risultatiTest = ottieniRisultatiTestDaUrl();
   mostraRisultatiInGrafico(risultatiTest);
   mostraPercentualiTesto(risultatiTest);
+  mostraNumeroDomandeSuTotale(risultatiTest);
+}
+
+function mostraNumeroDomandeSuTotale(risultatiTest) {
+  const spanNumeroGiusteEl = document.getElementById("numero-domande-giuste");
+  const spanNumeroSbagliateEl = document.getElementById("numero-domande-sbagliate");
+
+  const {totDomande, totDomandeGiuste, totDomandeSbagliate} = risultatiTest
+
+  spanNumeroGiusteEl.innerText = `${totDomandeGiuste} / ${totDomande} questions`;
+  spanNumeroSbagliateEl.innerText = `${totDomandeSbagliate} / ${totDomande} questions`;
 }
 
 function mostraPercentualiTesto(risultatiTest) {
@@ -26,7 +37,7 @@ function mostraPercentualiTesto(risultatiTest) {
   const percentualeSbagliateArrotondata = parseFloat(percentualeSbagliate.toFixed(2));
 
   spanPercentualeGiusteEl.innerText = `${percentualeGiusteArrotondata}%`;
-  spanPercentualeSbagliateEl.innerText = `${percentualeSbagliateArrotondata}%`
+  spanPercentualeSbagliateEl.innerText = `${percentualeSbagliateArrotondata}%`;
 }
 
 function mostraRisultatiInGrafico(risultatiTest) {

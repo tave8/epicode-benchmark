@@ -13,9 +13,21 @@
       <h1>Results</h1>
       <p>The summary of your answers:</p>
       <div class="container">
-        <p class="left">Correct <span id="percentuale-domande-giuste"></span></p>
+        <p class="left">
+          Correct
+          <!-- qui si vede solo la percentuale sbagliate, quindi "80%" -->
+          <span id="percentuale-domande-giuste"></span>
+          <!-- qui si vede qualcosa del tipo "15 / 20 questions" -->
+          <span id="numero-domande-giuste"></span>
+        </p>
         <canvas id="myChart" style="max-width: 1000px; height: 400px"></canvas>
-        <p class="right">Wrong  <span id="percentuale-domande-sbagliate"></span></p>
+        <p class="right">
+          Wrong
+          <!-- qui si vede solo la percentuale sbagliate, quindi "20%" -->
+          <span id="percentuale-domande-sbagliate"> </span>
+          <!-- qui si vede qualcosa del tipo "5 / 20 questions" -->
+          <span id="numero-domande-sbagliate"></span>
+        </p>
       </div>
     </main>
 
