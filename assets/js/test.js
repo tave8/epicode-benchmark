@@ -35,11 +35,11 @@ function handleClickBottoneRisposta(ev) {
 
   // attiva/disattiva questo per verificare come la risposta cliccata da utente
   // corrisponde alla risposta giusta reale
-  console.log("indice domanda attuale: ", indiceProssimaDomanda);
-  console.log("risposta cliccata da utente: ", rispostaCliccataDaUtente);
-  console.log("risposta giusta reale: ", rispostaGiustaReale);
-  console.log("risposta giusta:", rispostaEGiusta ? "SI" : "NO");
-  console.log("-----------------------------------------------")
+  // console.log("indice domanda attuale: ", indiceProssimaDomanda);
+  // console.log("risposta cliccata da utente: ", rispostaCliccataDaUtente);
+  // console.log("risposta giusta reale: ", rispostaGiustaReale);
+  // console.log("risposta giusta:", rispostaEGiusta ? "SI" : "NO");
+  // console.log("-----------------------------------------------")
 
   if (rispostaEGiusta) {
     contatoreRisposteGiuste += 1;
