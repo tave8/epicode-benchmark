@@ -1,44 +1,20 @@
-const questions = [
-  {
-    category: "Science: Computers",
-    type: "multiple",
-    difficulty: "easy",
-    question: "What does CPU stand for?",
-    correct_answer: "Central Processing Unit",
-    incorrect_answers: ["Central Process Unit", "Computer Personal Unit", "Central Processor Unit"],
-    countdownSecondi: 17,
-  },
-  {
-    category: "Science: Computers",
-    type: "multiple",
-    difficulty: "easy",
-    question: "In the programming language Java, which of these keywords would you put on a variable to make sure it doesn&#039;t get modified?",
-    correct_answer: "Final",
-    incorrect_answers: ["Static", "Private", "Public"],
-    countdownSecondi: 15,
-  },
-  {
-    category: "Science: Computers",
-    type: "boolean",
-    difficulty: "easy",
-    question: "The logo for Snapchat is a Bell.",
-    correct_answer: "False",
-    incorrect_answers: ["True"],
-    countdownSecondi: 25,
-  },
-];
-
-let indiceDomandaAttuale = 0;
+let indiceProssimaDomanda = 0;
 let ultimoSetInterval = null;
 let ultimoSetIntervalCiambella = null;
 
-// questo viene triggerato quando la pagina si carica
-window.addEventListener("load", () => {
-  // passa subito alla prossima domanda
-  passaAProssimaDomanda();
-  //   configura/aggiungi event listeners
-  addEventListeners();
-});
+// questo contatore conta il totale delle risposte giuste
+let contatoreRisposteGiuste = 0;
+
+function main() {
+  // questo viene triggerato quando la pagina si carica
+  window.addEventListener("load", () => {
+    // passa subito alla prossima domanda
+    passaAProssimaDomanda();
+    //   configura/aggiungi event listeners
+    addEventListeners();
+  });
+}
+main();
 
 function addEventListeners() {
   const bottoniRisposta = document.querySelectorAll(".risposte > .bottoni");
@@ -48,6 +24,23 @@ function addEventListeners() {
 }
 
 function handleClickBottoneRisposta(ev) {
+  // prendi il valore della risposta nel campo html
+  const rispostaCliccataDaUtente = ev.target.innerText;
+  // comparalo con la risposta giusta della domanda attuale
+  const indiceDomandaAttuale = indiceProssimaDomanda - 1;
+
+  const rispostaGiustaReale = questions[indiceDomandaAttuale].correct_answer;
+
+  // console.log("indice domanda attuale: ", indiceProssimaDomanda);
+  // console.log("risposta cliccata da utente: ", rispostaCliccataDaUtente);
+  // console.log("risposta giusta reale: ", rispostaGiustaReale);
+
+  const rispostaEGiusta = rispostaGiustaReale === rispostaCliccataDaUtente;
+
+  if (rispostaEGiusta) {
+    contatoreRisposteGiuste += 1;
+  }
+
   passaAProssimaDomanda({
     // bottonCliccatoEl: ev.target,
   });
@@ -65,14 +58,14 @@ const passaAProssimaDomanda = function (config = {}) {
   // }
 
   if (haiTerminatoDomande()) {
-    caricaPaginaRisultati();
+    passaAPaginaRisultati();
     // passa alla prossima pagina
     return;
   }
 
-  const prossimaDomanda = questions[indiceDomandaAttuale];
+  const prossimaDomanda = questions[indiceProssimaDomanda];
   //   incremento il contatore attuale
-  indiceDomandaAttuale += 1;
+  indiceProssimaDomanda += 1;
 
   aggiornaDomandaUI(prossimaDomanda);
 
@@ -92,7 +85,7 @@ const passaAProssimaDomanda = function (config = {}) {
   // }
 
   //   aggiorna anche il numero di domande nel footer
-  aggiornaNumeroDomandeUI(indiceDomandaAttuale);
+  aggiornaNumeroDomandeUI(indiceProssimaDomanda);
 };
 
 function attivaTimerUI({ countdownSecondi }) {
@@ -132,7 +125,6 @@ function attivaTimerUI({ countdownSecondi }) {
     // il nuovo tempo sarà il tempo attuale - 1 (secondo)
     secondiRimasti = secondiRimasti - 1;
   };
-
 
   // salva l'ultimo setInterval così potrai cancellare l'esecuzione
   // della funzione che c'era all'interno
@@ -183,31 +175,14 @@ function calcolaCIRC(radius) {
   return 2 * Math.PI * radius;
 }
 
-// const CIRC = 283;
-
-// function setRingProgress(progress) {
-//   ring.style.strokeDashoffset = CIRC * (1 - progress);
-// }
-// let p = 1;
-// setRingProgress(p);
-// const id = setInterval(() => {
-//   p += 0.02;
-//   if (p <= 0) {
-//     p = 0;
-//     clearInterval(id);
-//   }
-//   setRingProgress(p);
-// }, 1000);
-
-function aggiornaNumeroDomandeUI(indiceDomandaAttuale) {
-  const testoConNumDomanda = `QUESTION ${indiceDomandaAttuale} / ${questions.length}`;
+function aggiornaNumeroDomandeUI(indiceProssimaDomanda) {
+  const testoConNumDomanda = `QUESTION ${indiceProssimaDomanda} / ${questions.length}`;
   document.querySelector("footer .questionNumber").textContent = testoConNumDomanda;
 }
 
-function caricaPaginaRisultati() {
-  // TODO
+function passaAPaginaRisultati() {
   const totDomande = questions.length;
-  const totDomandeGiuste = 1;
+  const totDomandeGiuste = contatoreRisposteGiuste;
   const totDomandeSbagliate = totDomande - totDomandeGiuste;
 
   const risultatiTest = {
@@ -273,5 +248,5 @@ function ottieniTutteRisposte(domandaObj) {
 }
 
 function haiTerminatoDomande() {
-  return indiceDomandaAttuale === questions.length;
+  return indiceProssimaDomanda === questions.length;
 }
