@@ -16,7 +16,7 @@ function mostraNumeroDomandeSuTotale(risultatiTest) {
   const spanNumeroGiusteEl = document.getElementById("numero-domande-giuste");
   const spanNumeroSbagliateEl = document.getElementById("numero-domande-sbagliate");
 
-  const {totDomande, totDomandeGiuste, totDomandeSbagliate} = risultatiTest
+  const { totDomande, totDomandeGiuste, totDomandeSbagliate } = risultatiTest;
 
   spanNumeroGiusteEl.innerText = `${totDomandeGiuste} / ${totDomande} questions`;
   spanNumeroSbagliateEl.innerText = `${totDomandeSbagliate} / ${totDomande} questions`;
@@ -41,6 +41,7 @@ function mostraPercentualiTesto(risultatiTest) {
 }
 
 function mostraRisultatiInGrafico(risultatiTest) {
+  console.log("chiamato funzione", risultatiTest);
   // questa libreria non ha bisogno di un pre-calcolo
   // su base 100, ma calcola automaticamente la base 100 derivandola
   // da tot domande giuste e tot domande sbagliate
@@ -49,7 +50,9 @@ function mostraRisultatiInGrafico(risultatiTest) {
   let barColors = ["#b91d47", "#00aba9"];
 
   window.addEventListener("load", () => {
-    const graph = document.getElementById("#graph"); // inserisci codice qui
+    
+    const graph = document.getElementById("myChart"); // inserisci codice qui
+
     new Chart("myChart", {
       type: "doughnut",
       data: {
@@ -68,6 +71,7 @@ function mostraRisultatiInGrafico(risultatiTest) {
       },
     });
   });
+  
 }
 
 function ottieniRisultatiTestDaUrl() {
